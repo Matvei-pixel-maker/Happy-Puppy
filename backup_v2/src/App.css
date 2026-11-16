@@ -1,0 +1,5 @@
+/* App-level styles intentionally minimal; layout and visuals use Tailwind utility classes. */
+
+html {
+  scroll-behavior: smooth;
+}

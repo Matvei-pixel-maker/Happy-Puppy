@@ -1,0 +1,4 @@
+/* App-level styles intentionally minimal; layout and visuals use Tailwind utility classes. */
+
+/* scroll-behavior: smooth намеренно не задан глобально: он конфликтует с GSAP ScrollTrigger (pin/scrub).
+   Плавные переходы по якорям делаются в App.jsx через scrollIntoView. */
