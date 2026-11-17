@@ -53,7 +53,6 @@ export default function Scene({ visual3D }) {
   const isDraggingRef = useRef(false)
   const lastPosRef = useRef({ x: 0, y: 0 })
   const envMap = useMemo(() => createCuteEnvMap(), [])
-
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)
     check()
@@ -89,7 +88,7 @@ export default function Scene({ visual3D }) {
 
   return (
     <div className="relative z-0 h-[500px] w-full cursor-grab active:cursor-grabbing">
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 0.4, 6.2], fov: 35 }}>
+      <Canvas dpr={isMobile ? 1 : [1, 2]} camera={{ position: [0, 0.4, 6.2], fov: 35 }}>
         <ambientLight intensity={0.7} />
         <directionalLight position={[3, 5, 4]} intensity={1.2} />
         <directionalLight position={[-3, 2, -2]} intensity={0.4} />

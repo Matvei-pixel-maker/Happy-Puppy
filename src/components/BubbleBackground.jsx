@@ -10,7 +10,6 @@ import { useEffect, useRef } from 'react'
  */
 
 const COLORS = ['#c68b59', '#a05a2c', '#8d5524', '#ff758f', '#ffd166', '#bfeadf']
-const BUBBLE_COUNT = 22
 
 function BubbleBackground() {
   const containerRef = useRef(null)
@@ -20,6 +19,10 @@ function BubbleBackground() {
   const mouseRef = useRef({ x: 0, y: 0, active: false })
 
   useEffect(() => {
+    // На мобилке меньше пузырей — меньше нагрузки на CPU и аккумулятор
+    const isMobile = window.innerWidth < 768
+    const BUBBLE_COUNT = isMobile ? 12 : 22
+
     const canvas = canvasRef.current
     const container = containerRef.current
     if (!canvas || !container) return

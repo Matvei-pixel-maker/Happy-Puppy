@@ -108,10 +108,12 @@ function Rig({ explodeRef, children }) {
 
 export default function ExplodedScene({ visual3D, explodeRef }) {
   const envMap = useMemo(() => createCuteEnvMap(), [])
+  // На мобилке снижаем DPR до 1, чтобы не нагружать GPU и не было лагов
+  const dpr = typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : [1, 2]
 
   return (
     <div className="pointer-events-none absolute inset-0 z-0">
-      <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 9.5], fov: 35 }}>
+      <Canvas dpr={dpr} camera={{ position: [0, 0, 9.5], fov: 35 }}>
         <ambientLight intensity={0.7} />
         <directionalLight position={[3, 5, 4]} intensity={1.2} />
         <directionalLight position={[-3, 2, -2]} intensity={0.4} />
