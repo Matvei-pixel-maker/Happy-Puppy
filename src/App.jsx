@@ -5,6 +5,7 @@ import { MENU_ITEMS } from './data/menu'
 import Scene from './components/Scene'
 import Decor from './components/Decor'
 import ExplodedSection from './components/ExplodedSection'
+import PhotoIntro from './components/PhotoIntro'
 import Navbar from './components/Navbar'
 import { useLanguage } from './context/useLanguage'
 import { ALL_CATEGORY, formatVolume } from './data/translations'
@@ -35,6 +36,12 @@ function App() {
     const onResize = () => setIsMobile(window.innerWidth < 768)
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  // При первой загрузке сайта скроллим к самому верху (шапка с кнопками),
+  // а не к 3D-модели стакана.
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' })
   }, [])
 
   // Плавная прокрутка по якорям (#menu, #about...) без CSS scroll-behavior, чтобы не ломать ScrollTrigger
@@ -78,6 +85,8 @@ function App() {
       </div>
 
       <Navbar />
+
+      <PhotoIntro />
 
       <main id="top" className="mx-auto max-w-6xl px-6 pt-28 pb-16 md:pt-32">
         <section className="relative mb-20 grid items-center gap-10 md:grid-cols-2">
@@ -271,7 +280,7 @@ function App() {
                   onClick={() => setVisibleCount((prev) => prev + 3)}
                   className="mx-auto mt-8 rounded-3xl bg-[#f4a6b8] px-8 py-3 text-base font-bold text-white shadow-lg transition-all hover:scale-105 hover:bg-[#ee93aa]"
                 >
-                  Показать ещё
+                  {t.menu.showMore}
                 </button>
               )}
               {visibleCount >= filteredItems.length && (
@@ -283,7 +292,7 @@ function App() {
                   }}
                   className="mx-auto mt-8 rounded-3xl border border-[#4a3b32]/20 bg-white/60 px-8 py-3 text-base font-bold text-[#4a3b32] shadow-sm transition-all hover:scale-105 hover:bg-white"
                 >
-                  Свернуть
+                  {t.menu.showLess}
                 </button>
               )}
             </>
@@ -351,6 +360,19 @@ function App() {
               </div>
             </div>
           </motion.div>
+          <a
+            href="https://www.instagram.com/happypuppyminsk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center gap-2 rounded-3xl bg-[#f4a6b8] px-5 py-2.5 text-xs font-bold text-white shadow-lg transition-all hover:scale-105 hover:bg-[#ee93aa] md:py-3 md:px-6 md:text-sm"
+          >
+            <img
+              src="/instalogo.jpg"
+              alt="Instagram"
+              className="w-5 h-5 rounded-sm object-cover"
+            />
+            Instagram: @happypuppyminsk
+          </a>
         </section>
       </main>
     </div>

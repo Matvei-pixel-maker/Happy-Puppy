@@ -14,7 +14,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
         <a href="#top" className="flex items-center gap-3">
-          <img src="/logo.png" alt="Happy Puppy" className="h-10 w-10 rounded-2xl object-contain" />
+          <img src="/logo.png" alt="Happy Puppy" className="h-10 w-10 rounded-2xl object-contain md:h-14 md:w-14 drop-shadow-md" />
           <span className="text-lg font-extrabold tracking-wide md:text-xl">{t.brand}</span>
         </a>
 

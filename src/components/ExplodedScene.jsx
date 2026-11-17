@@ -1,7 +1,49 @@
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
+import * as THREE from 'three'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment } from '@react-three/drei'
 import BubbleTeaModel from './BubbleTeaModel'
+
+function createCuteEnvMap() {
+  if (typeof document === 'undefined') return null
+
+  const size = 512
+  const images = []
+
+  for (let i = 0; i < 6; i++) {
+    const canvas = document.createElement('canvas')
+    canvas.width = size
+    canvas.height = size
+    const ctx = canvas.getContext('2d')
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, size)
+    gradient.addColorStop(0, '#f4a6b8')
+    gradient.addColorStop(0.45, '#bfeadf')
+    gradient.addColorStop(1, '#fdfbf7')
+
+    ctx.fillStyle = gradient
+    ctx.fillRect(0, 0, size, size)
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.35)'
+    ctx.beginPath()
+    ctx.arc(size * 0.25, size * 0.28, size * 0.14, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.beginPath()
+    ctx.arc(size * 0.72, size * 0.38, size * 0.11, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.beginPath()
+    ctx.arc(size * 0.48, size * 0.5, size * 0.16, 0, Math.PI * 2)
+    ctx.fill()
+
+    images.push(canvas)
+  }
+
+  const cubeMap = new THREE.CubeTexture(images)
+  cubeMap.needsUpdate = true
+  cubeMap.colorSpace = THREE.SRGBColorSpace
+
+  return cubeMap
+}
 
 // Запоминаем исходную позицию узла, чтобы потом всегда возвращаться ровно в неё.
 function base(obj) {
@@ -65,6 +107,8 @@ function Rig({ explodeRef, children }) {
 }
 
 export default function ExplodedScene({ visual3D, explodeRef }) {
+  const envMap = useMemo(() => createCuteEnvMap(), [])
+
   return (
     <div className="pointer-events-none absolute inset-0 z-0">
       <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 9.5], fov: 35 }}>
@@ -74,7 +118,7 @@ export default function ExplodedScene({ visual3D, explodeRef }) {
         <Rig explodeRef={explodeRef}>
           <BubbleTeaModel visual3D={visual3D} />
         </Rig>
-        <Environment preset="city" />
+        <Environment map={envMap} />
       </Canvas>
     </div>
   )

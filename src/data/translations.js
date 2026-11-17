@@ -54,6 +54,8 @@ export const translations = {
       volumeUnit: 'мл',
       addToOrder: 'В заказ',
       addToOrderLabel: 'Добавить в заказ',
+      showMore: 'Показать ещё',
+      showLess: 'Свернуть',
     },
     about: {
       eyebrow: 'О нас',
@@ -119,6 +121,8 @@ export const translations = {
       volumeUnit: 'ml',
       addToOrder: 'Add',
       addToOrderLabel: 'Add to order',
+      showMore: 'Show more',
+      showLess: 'Collapse',
     },
     about: {
       eyebrow: 'About us',
@@ -183,6 +187,8 @@ export const translations = {
       volumeUnit: '毫升',
       addToOrder: '加入订单',
       addToOrderLabel: '加入订单',
+      showMore: '显示更多',
+      showLess: '收起',
     },
     about: {
       eyebrow: '关于我们',

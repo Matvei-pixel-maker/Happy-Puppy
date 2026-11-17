@@ -30,7 +30,13 @@ function Toppings({ type, color, isMobile }) {
           ) : (
             <sphereGeometry args={[size, 24, 24]} />
           )}
-          <meshStandardMaterial color={color} roughness={0.35} metalness={0.05} />
+          <meshPhysicalMaterial
+            color={color}
+            roughness={0.1}
+            metalness={0}
+            clearcoat={0.8}
+            clearcoatRoughness={0.1}
+          />
         </mesh>
       ))}
     </group>
@@ -53,11 +59,13 @@ export default function BubbleTeaModel({ visual3D, isMobile }) {
           transparent={true}
           opacity={0.3}
           depthWrite={false}
-          roughness={0.08}
-          transmission={0.6}
-          thickness={0.35}
+          roughness={0.15}
+          metalness={0}
+          transmission={0.9}
+          thickness={0.2}
+          ior={1.49}
           clearcoat={1}
-          clearcoatRoughness={0.12}
+          clearcoatRoughness={0.1}
           side={2}
         />
       </mesh>
@@ -96,9 +104,12 @@ export default function BubbleTeaModel({ visual3D, isMobile }) {
           transparent={true}
           opacity={0.8}
           depthWrite={false}
-          roughness={0.15}
+          roughness={0.05}
+          metalness={0}
           transmission={0}
           thickness={0}
+          clearcoat={0.8}
+          clearcoatRoughness={0.1}
         />
       </mesh>
 
