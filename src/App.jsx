@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ShoppingBag } from 'lucide-react'
 import { MENU_ITEMS } from './data/menu'
@@ -38,11 +38,10 @@ function App() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  // При первой загрузке сайта скроллим к самому верху (первая фото в контейнере),
-  // а не к 3D-модели стакана или любому якорю. useLayoutEffect выполняется
-  // синхронно после вставки DOM — до отрисовки браузера, поэтому мобилка
-  // не успевает восстановить старую позицию скролла.
-  useEffect(() => {
+  // При первой загрузке сайта скроллим к самому верху — первому блоку с фотографиями (cafe9.jpg).
+  // useLayoutEffect выполняется синхронно после вставки DOM, до отрисовки браузера,
+  // поэтому на мобилке нет мерцания шапки — пользователь сразу видит контейнер с фото.
+  useLayoutEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' })
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual'
@@ -69,19 +68,6 @@ function App() {
     document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  // Скролл к крутящемуся 3D-стакану после выбора другого напитка в меню.
-  // Скроллит к контейнеру с Canvas (Scene), где модель можно покрутить, а не к верху сайта.
-  // behavior: 'auto' заставляет страницу сразу прыгнуть, минуя застревание
-  // на зоне pin'а ExplodedSection (ScrollTrigger).
-  useEffect(() => {
-    const target = document.getElementById('scene-3d')
-    if (target) {
-      target.scrollIntoView({ behavior: 'auto', block: 'center' })
-    } else {
-      window.scrollTo({ top: 0, behavior: 'auto' })
-    }
-  }, [selected.id])
-
   return (
     <div className="min-h-screen overflow-x-clip bg-[#fdfbf7] text-[#4a3b32]">
       {/* Фон с плавающими шариками тапиоки на весь сайт */}
@@ -89,9 +75,9 @@ function App() {
         <BubbleBackground />
       </div>
 
-      <Navbar />
-
       <PhotoIntro />
+
+      <Navbar />
 
       <main id="top" className="mx-auto max-w-6xl px-6 pt-28 pb-16 md:pt-32">
         <section className="relative mb-20 grid items-center gap-10 md:grid-cols-2">
@@ -303,6 +289,10 @@ function App() {
             </>
           )}
         </section>
+
+        <p className="mx-auto max-w-6xl px-6 text-center text-sm text-[#4a3b32]/60 mb-20">
+          Актуальную стоимость и наличие, пожалуйста, уточняйте при заказе.
+        </p>
 
         <section id="about" className="relative z-20 mt-24 scroll-mt-28">
           <motion.div

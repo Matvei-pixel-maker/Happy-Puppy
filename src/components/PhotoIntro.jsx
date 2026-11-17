@@ -78,7 +78,7 @@ export default function PhotoIntro() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#fdfbf7]">
+    <section ref={sectionRef} id="photo-start" className="relative w-full bg-[#fdfbf7]">
       <div className="top-0 z-10 h-screen w-full flex items-center justify-center">
         <div className="relative h-[85vh] w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto overflow-hidden rounded-[3rem] shadow-2xl border border-white/60 bg-white/80 backdrop-blur-sm">
           {CARDS.map((card, i) => (
