@@ -38,11 +38,15 @@ function App() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  // При первой загрузке сайта скроллим к самому верху (шапка с кнопками),
-  // а не к 3D-модели стакана.
-  useEffect(() => {
+  // При первой загрузке сайта скроллим к самому верху (первая фото в контейнере),
+  // а не к 3D-модели стакана или любому якорю. Вызываем сразу и синхронно,
+  // чтобы на мобилке браузер не восстановил старую позицию скролла.
+  if (typeof window !== 'undefined') {
     window.scrollTo({ top: 0, behavior: 'auto' })
-  }, [])
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual'
+    }
+  }
 
   // Плавная прокрутка по якорям (#menu, #about...) без CSS scroll-behavior, чтобы не ломать ScrollTrigger
   useEffect(() => {
