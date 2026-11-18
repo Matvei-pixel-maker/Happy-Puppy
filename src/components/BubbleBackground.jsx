@@ -18,15 +18,10 @@ function BubbleBackground() {
   const sizeRef = useRef({ w: 0, h: 0 })
   const mouseRef = useRef({ x: 0, y: 0, active: false })
 
-  // Полностью отключаем пузырьки на мобильных — снижаем нагрузку на CPU
-  if (typeof window !== 'undefined' && window.innerWidth < 768) {
-    return null
-  }
-
   useEffect(() => {
-    // На мобилке меньше пузырей — меньше нагрузки на CPU и аккумулятор
+    // На десктопе больше пузырей для насыщенного фона, на мобилке немного, чтобы не лагало
     const isMobile = window.innerWidth < 768
-    const BUBBLE_COUNT = isMobile ? 12 : 22
+    const BUBBLE_COUNT = isMobile ? 12 : 55
 
     const canvas = canvasRef.current
     const container = containerRef.current

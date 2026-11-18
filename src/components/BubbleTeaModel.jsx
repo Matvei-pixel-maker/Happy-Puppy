@@ -36,6 +36,8 @@ function Toppings({ type, color, isMobile }) {
             metalness={0}
             clearcoat={0.8}
             clearcoatRoughness={0.1}
+            emissive={isMobile ? liquidColor : '#000000'}
+            emissiveIntensity={isMobile ? 0.3 : 0}
           />
         </mesh>
       ))}
@@ -67,6 +69,8 @@ export default function BubbleTeaModel({ visual3D, isMobile }) {
           clearcoat={1}
           clearcoatRoughness={0.1}
           side={2}
+          emissive={isMobile ? '#ffffff' : '#000000'}
+          emissiveIntensity={isMobile ? 0.1 : 0}
         />
       </mesh>
 

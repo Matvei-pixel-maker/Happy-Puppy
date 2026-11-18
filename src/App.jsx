@@ -5,11 +5,12 @@ import { MENU_ITEMS } from './data/menu'
 import Scene from './components/Scene'
 import Decor from './components/Decor'
 import ExplodedSection from './components/ExplodedSection'
-import PhotoIntro from './components/PhotoIntro'
+import StickyCard002 from './components/StickyCard002'
 import Navbar from './components/Navbar'
 import { useLanguage } from './context/useLanguage'
 import { ALL_CATEGORY, formatVolume } from './data/translations'
 import BubbleBackground from './components/BubbleBackground'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import './App.css'
 
 // Значения совпадают с полем category в menu.js (по ним идёт фильтрация), подписи берутся из translations
@@ -42,10 +43,15 @@ function App() {
   // useLayoutEffect выполняется синхронно после вставки DOM, до отрисовки браузера,
   // поэтому на мобилке нет мерцания шапки — пользователь сразу видит контейнер с фото.
   useLayoutEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' })
+    window.scrollTo(0, 0)
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual'
     }
+  }, [])
+
+  // Принудительный сброс скролла после рендера (на случай конфликта с Lenis/StrictMode)
+  useEffect(() => {
+    window.scrollTo(0, 0)
   }, [])
 
   // Плавная прокрутка по якорям (#menu, #about...) без CSS scroll-behavior, чтобы не ломать ScrollTrigger
@@ -68,6 +74,22 @@ function App() {
     document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
+  // Обновляем ScrollTrigger после монтирования и загрузки картинок,
+  // чтобы pin и scrub работали корректно
+  useEffect(() => {
+    const refresh = () => {
+      ScrollTrigger.refresh()
+    }
+    // Даём время на рендер и загрузку изображений
+    const timeout = setTimeout(refresh, 100)
+    // Также обновляем при загрузке всех ресурсов
+    window.addEventListener('load', refresh)
+    return () => {
+      clearTimeout(timeout)
+      window.removeEventListener('load', refresh)
+    }
+  }, [])
+
   return (
     <div className="min-h-screen overflow-x-clip bg-[#fdfbf7] text-[#4a3b32]">
       {/* Фон с плавающими шариками тапиоки на весь сайт */}
@@ -75,7 +97,15 @@ function App() {
         <BubbleBackground />
       </div>
 
-      <PhotoIntro />
+      <StickyCard002
+        cards={[
+          { id: 1, image: '/cafe9.jpg' },
+          { id: 2, image: '/cafe10.jpg' },
+          { id: 3, image: '/cafe7.jpg' },
+          { id: 4, image: '/cafe8.jpg' },
+          { id: 5, image: '/cafe3.webp' },
+        ]}
+      />
 
       <Navbar />
 

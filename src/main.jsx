@@ -23,6 +23,8 @@ if (!isMobile) {
     mouseMultiplier: 1,
     smoothTouch: false,
     touchMultiplier: 2,
+    // Не перехватывать скролл сразу при инициализации
+    anchorScrollDuration: 0,
   })
 
   // Synchronize Lenis with GSAP ticker
@@ -30,6 +32,11 @@ if (!isMobile) {
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000)
   })
+  
+  // Сброс скролла после инициализации Lenis
+  setTimeout(() => {
+    lenis.scrollTo(0, { immediate: true })
+  }, 0)
 }
 
 createRoot(document.getElementById('root')).render(

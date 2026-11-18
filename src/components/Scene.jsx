@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
-import { Environment, Float } from '@react-three/drei'
+import { Environment, Float, OrbitControls } from '@react-three/drei'
 import BubbleTeaModel from './BubbleTeaModel'
 
 function createCuteEnvMap() {
@@ -71,15 +71,20 @@ export default function Scene({ visual3D }) {
         // чтобы касания не перехватывали скролл страницы.
         pointerEvents={isMobile ? 'none' : 'auto'}
       >
-        <ambientLight intensity={0.7} />
-        <directionalLight position={[3, 5, 4]} intensity={1.2} />
-        <directionalLight position={[-3, 2, -2]} intensity={0.4} />
+        <ambientLight intensity={isMobile ? 1.4 : 0.7} />
+        <directionalLight position={[3, 5, 4]} intensity={isMobile ? 2.0 : 1.2} />
+        <directionalLight position={[-3, 2, -2]} intensity={isMobile ? 1.0 : 0.4} />
         <Float speed={1.6} rotationIntensity={0} floatIntensity={0.6}>
           <group ref={cupRef}>
             <BubbleTeaModel visual3D={visual3D} isMobile={isMobile} />
           </group>
         </Float>
-        {isMobile ? null : <Environment map={envMap} />}
+        {isMobile ? null : (
+          <>
+            <Environment map={envMap} />
+            <OrbitControls enableZoom={false} />
+          </>
+        )}
       </Canvas>
     </div>
   )
