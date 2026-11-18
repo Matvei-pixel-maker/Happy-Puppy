@@ -32,7 +32,7 @@ if (!isMobile) {
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000)
   })
-  
+
   // Сброс скролла после инициализации Lenis
   setTimeout(() => {
     lenis.scrollTo(0, { immediate: true })

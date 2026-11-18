@@ -1,8 +1,11 @@
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment } from '@react-three/drei'
 import BubbleTeaModel from './BubbleTeaModel'
+import CanvasErrorBoundary from './CanvasErrorBoundary'
+import CupFallback from './CupFallback'
+import { hasWebGL } from '../lib/webgl'
 
 function createCuteEnvMap() {
   if (typeof document === 'undefined') return null
@@ -108,20 +111,41 @@ function Rig({ explodeRef, children }) {
 
 export default function ExplodedScene({ visual3D, explodeRef }) {
   const envMap = useMemo(() => createCuteEnvMap(), [])
+  // WebGL может быть недоступен в мобильных WebView — тогда Canvas не монтируем
+  const [webglOk] = useState(() => hasWebGL())
   // На мобилке снижаем DPR до 1, чтобы не нагружать GPU и не было лагов
   const dpr = typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : [1, 2]
 
+  if (!webglOk) {
+    return (
+      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
+        <div className="h-[70%] w-full max-w-xs">
+          <CupFallback visual3D={visual3D} />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="pointer-events-none absolute inset-0 z-0">
-      <Canvas dpr={dpr} camera={{ position: [0, 0, 9.5], fov: 35 }}>
-        <ambientLight intensity={0.7} />
-        <directionalLight position={[3, 5, 4]} intensity={1.2} />
-        <directionalLight position={[-3, 2, -2]} intensity={0.4} />
-        <Rig explodeRef={explodeRef}>
-          <BubbleTeaModel visual3D={visual3D} />
-        </Rig>
-        <Environment map={envMap} />
-      </Canvas>
+      <CanvasErrorBoundary fallback={null}>
+        <Canvas
+          dpr={dpr}
+          camera={{ position: [0, 0, 9.5], fov: 35 }}
+          gl={{ antialias: false, powerPreference: 'default', failIfMajorPerformanceCaveat: false }}
+          onCreated={({ gl }) => {
+            gl.domElement.addEventListener('webglcontextlost', (e) => e.preventDefault())
+          }}
+        >
+          <ambientLight intensity={0.7} />
+          <directionalLight position={[3, 5, 4]} intensity={1.2} />
+          <directionalLight position={[-3, 2, -2]} intensity={0.4} />
+          <Rig explodeRef={explodeRef}>
+            <BubbleTeaModel visual3D={visual3D} />
+          </Rig>
+          {envMap ? <Environment map={envMap} /> : null}
+        </Canvas>
+      </CanvasErrorBoundary>
     </div>
   )
 }
