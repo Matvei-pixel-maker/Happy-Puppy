@@ -1,0 +1,92 @@
+﻿vite v8.3.8 building client environment for production...
+transforming...
+✓ 3085 modules transformed.
+node.exe : ✗ Build failed in 1.31s
+строка:1 знак:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (✗ Build failed in 1.31s:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+error during build:
+Build failed with 3 errors:
+
+[plugin @tailwindcss/vite:generate:build] C:/Users/matve/OneDrive/Desktop/happy-puppy/src/index.css
+CssSyntaxError: Unterminated string: "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20
+width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cimage%20href%3D%22data%3Aimage%2Fpng%3Bbase
+64%2CiVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAIP0lEQVR4nL1Xa2xUxxU%2BM%2Feu92V712vvw9i767fZXRvjmqBgCLWIKXFeNFRURZ
+SqorSKKvGr7T%2FEymlUNWmTSlX7o1J%2BRE0DqlFoSoAkKtTYhLeNgy1TP%2FDiBcw%2BHHt37X347u6dqc5lN5AQcB6lR5q9s%2FfMzPnmOzPfzCXw1Yx
+6vV64evUqcbvdvLu7mwMAlkduJFc%2BY14v0P9rcIPBYKyrdu5uaW7%2B1ZrVq9vzfq%2FX%2B%2BiAbN%2B%2BXeCcIwCxoaH2u%2B1r1wQ2d3ybr1uzpk
+ej0dixTc4vfJ3x6TJ%2BUlLio4QQrlKpGnW6wh%2FW1tWbDUYjJFLJjWazeQ8AFKC%2FsrKy4IvStJyJyzUYHx%2FkhBBgjFlVoqrF5fGQ8fHxVCKZtOpU4
+k63u%2BFccXFLXybjw%2BCaW7duMQDIF3m58elyDeLxNrJ%2F%2F35qMZlUokjEWDRKZcao0WBgOp2%2BNpNmLwYCV5yDg4PJmZmZFKVUopRmOOcslxb6jQ
+DU1NSQ7u5u5qhxRLPZbLi3t5f7p6fVGq02k5UZTyVTT8ViwW0AYOacmxhjesaYCtOSY4A9LDXiQ2KTNgBxdHRU%2BVNR2zh7bXT02mxgppVQqtLrNCCKAtH
+rtWqtTvsLY3HJCwuR2PX5xegUAAwAQD8VhFngHNOnyoG5LyXkQcDcAHSM0nRBgRpqV5Svj8QXv2%2B1WbdUVdfUV1VXE6fdwaw2q6DTF3JBEEginoRQKJgJ
+Bm5Hx8bGQgOXLkzeuB08AQD%2FEAQhwBgHzhku1PRyAASFNqSQc3212fZ0g6fhR1W1dZ1NzU2appYWcDqd3Gq2EV2hHtvnqQZpaUkMBgIwOTkJA5cuwoWz5
+25cvHTh8O3ZuUPICqUkzZiyZUkuNQ9dFyWN1c7dT7Y%2FPv3Kr1%2Fik%2BNjMuccy6cmyzLPZrM8k8mwbDaLviznXMqXi%2BfP8xd%2FspvXVzlPAsAzAI
+CpyE%2FyvskLGJxSCvWV9RWVltLfPLelM3Ls3Xd5ZG5OiYc%2FjDGl3Fv%2F9B1jCAqdd4oss8h8hL%2F%2B6qtyc0P9JQDYhqqZE648GMVEVDzc7wBQZTM
+Z%2FrR7145w38l%2FcWlpCWOlEUButsrMPxv4Lpi7rGCXO4zMhsPsj6%2B%2FxhuqnBcAYENPDxe8Xq%2BYV0%2FS1taG2wbrpRUrLK%2Fs%2BfGuxTP9p3
+CAFA4iSZIS%2BCsZ4zyTTvNEIoFsJObmPpFf7vZy%2BwrbYQBYhUxjXGX2%2BAcAdBWWkp%2Fu%2BsH22PDHQ9gpKUmSjIHzlH8dQ0ZSqRQOkEYQu3bu4CV
+FRS%2BhanLO76AglEKBAM90dmyYOnfmdA4%2FzyCV%2FwtLS7gmMTNZ1nfyJH%2B%2Bq%2BsKAHQJggB0YGBA5mp1RbOnqWvTk501q1pakQ05lUoJOWa%2B
+sYmiiGJEMM3rN27MeDxul6lQt3bfvn1UFEWRgSyv9jQ3bXz22a1MVYBaAaBS4bK4XyY4v3sByvvz776ovfKeUpCzWYJAgFKoq69X2R12e3d3t4miGpQZ9I2
+11TX17uZmDIxoKdLziIyUWa283OEsBgCryGVZqK6pLV1RWakRBAHx4D7lefpxdrIso0Ao5d7Z5uv4xCp2uVPniv9BKSwoKCBatQarFPcia3StpJZymyKpki
+... (line truncated to 2000 chars)"
+    at Br (file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/tailwindcss/dist/lib.mjs:3:7449)
+    at $e (file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/tailwindcss/dist/lib.mjs:3:3551)
+    at nc (file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/tailwindcss/dist/lib.mjs:38:1365)
+    at wu (file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/@tailwindcss/node/dist/index.mjs:10:3598)
+    at E.generate 
+(file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/@tailwindcss/vite/dist/index.mjs:1:4912)
+    at TransformPluginContextImpl.handler 
+(file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/@tailwindcss/vite/dist/index.mjs:1:3618)
+    at TransformPluginContextImpl.handler 
+(file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/vite/dist/node/chunks/node.js:35029:13)
+    at plugin (file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/rolldown/dist/shared/bindingify-input-o
+ptions-BjFSnI07.mjs:1758:30)
+    at file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/rolldown/dist/shared/bindingify-input-options-B
+jFSnI07.mjs:2146:21
+    at plugin.<computed> (file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/rolldown/dist/shared/binding
+ify-input-options-BjFSnI07.mjs:2343:18)
+[31m[builtin:vite-transform] [0mExpected corresponding JSX closing tag for 'Suspense'.
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/components/Scene.jsx:94:7 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m67 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m 
+[0m[38;5;249m<[0mSuspense[38;5;249m [0m[38;5;249mf[0m[38;5;249ma[0m[38;5;249ml[0m[38;5;249ml[0m[38;5;249m
+b[0m[38;5;249ma[0m[38;5;249mc[0m[38;5;249mk[0m[38;5;249m=[0m[38;5;249m{[0m[38;5;249m<[0m[38;5;249md[0m[
+38;5;249mi[0m[38;5;249mv[0m[38;5;249m [0m[38;5;249mc[0m[38;5;249ml[0m[38;5;249ma[0m[38;5;249ms[0m[38;5;24
+9ms[0m[38;5;249mN[0m[38;5;249ma[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249m=[0m[38;5;249m"[0m[38;5;249mh[0m
+[38;5;249m-[0m[38;5;249m[[0m[38;5;249m5[0m[38;5;249m0[0m[38;5;249m0[0m[38;5;249mp[0m[38;5;249mx[0m[38;5;
+249m][0m[38;5;249m [0m[38;5;249mw[0m[38;5;249m-[0m[38;5;249mf[0m[38;5;249mu[0m[38;5;249ml[0m[38;5;249ml[
+0m[38;5;249m"[0m[38;5;249m [0m[38;5;249m/[0m[38;5;249m>[0m[38;5;249m}[0m[38;5;249m>[0m
+ [38;5;240m   │[0m        ────┬───  
+ [38;5;240m   │[0m            ╰───── Opened here
+ [38;5;240m   │[0m 
+ [38;5;246m94 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m 
+[0m[38;5;249m<[0m[38;5;249m/[0mdiv[38;5;249m>[0m
+ [38;5;240m   │[0m       ─┬─  
+ [38;5;240m   │[0m        ╰─── Expected `</Suspense>`
+[38;5;246m────╯[0m
+
+[31m[builtin:vite-transform] [0mUnexpected token. Did you mean `{'}'}` or `&rbrace;`?
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/components/Scene.jsx:96:1 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m96 │[0m [38;5;249m}[0m
+ [38;5;240m   │[0m │ 
+ [38;5;240m   │[0m ╰─ 
+[38;5;246m────╯[0m
+
+    at aggregateBindingErrorsIntoJsError 
+(file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/rolldown/dist/shared/error-CLo6EJKG.mjs:50:18)
+    at unwrapBindingResult 
+(file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/rolldown/dist/shared/error-CLo6EJKG.mjs:20:128)
+    at #build 
+(file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/rolldown/dist/shared/rolldown-AohEFLrh.mjs:146:34)
+    at async buildEnvironment 
+(file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/vite/dist/node/chunks/node.js:34787:66)
+    at async Object.build 
+(file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/vite/dist/node/chunks/node.js:35208:19)
+    at async Object.buildApp 
+(file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/vite/dist/node/chunks/node.js:35205:153)
+    at async CAC.<anonymous> 
+(file:///C:/Users/matve/OneDrive/Desktop/happy-puppy/node_modules/vite/dist/node/cli.js:789:3) {
+  errors: [Getter/Setter]
+}

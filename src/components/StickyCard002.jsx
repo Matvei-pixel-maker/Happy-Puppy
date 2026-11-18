@@ -96,7 +96,12 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
 
   return (
     <div
-      className={cn(isMobile ? "relative w-full" : "sticky-cards relative h-screen w-full", className)}
+      className={cn(
+        isMobile
+          ? "relative w-full min-h-[calc(100vh-80px)]"
+          : "sticky-cards relative h-screen w-full",
+        className
+      )}
       ref={container}
     >
       <div className={cn(isMobile ? "relative w-full py-8" : "relative flex h-full w-full items-center justify-center overflow-hidden p-3 lg:p-8")}>

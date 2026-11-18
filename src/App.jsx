@@ -105,6 +105,7 @@ function App() {
           { id: 4, image: '/cafe8.jpg' },
           { id: 5, image: '/cafe3.webp' },
         ]}
+        className="pt-20 md:pt-0"
       />
 
       <Navbar />
