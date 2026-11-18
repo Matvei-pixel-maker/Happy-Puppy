@@ -22,6 +22,9 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
 
   useGSAP(
     () => {
+      // На мобильных вообще не инициализируем ScrollTrigger/GSAP для галереи
+      if (isMobile) return;
+
       gsap.registerPlugin(ScrollTrigger);
 
       const imageElements = imageRefs.current;
@@ -33,48 +36,46 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
 
       for (let i = 1; i < totalCards; i++) {
         if (!imageElements[i]) continue;
-        gsap.set(imageElements[i], { y: isMobile ? 0 : "100%", scale: 1, rotation: 0, autoAlpha: 1 });
+        gsap.set(imageElements[i], { y: "100%", scale: 1, rotation: 0, autoAlpha: 1 });
       }
 
-      if (!isMobile) {
-        const scrollTimeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: container.current,
-            start: "top top",
-            end: `+=${window.innerHeight * (totalCards - 1)}`,
-            pin: true,
-            scrub: true,
-            pinSpacing: true,
+      const scrollTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top top",
+          end: `+=${window.innerHeight * (totalCards - 1)}`,
+          pin: true,
+          scrub: true,
+          pinSpacing: true,
+        },
+      });
+
+      for (let i = 0; i < totalCards - 1; i++) {
+        const currentImage = imageElements[i];
+        const nextImage = imageElements[i + 1];
+        const position = i;
+        if (!currentImage || !nextImage) continue;
+
+        scrollTimeline.to(
+          currentImage,
+          {
+            scale: 0.7,
+            rotation: 5,
+            duration: 1,
+            ease: "none",
           },
-        });
+          position,
+        );
 
-        for (let i = 0; i < totalCards - 1; i++) {
-          const currentImage = imageElements[i];
-          const nextImage = imageElements[i + 1];
-          const position = i;
-          if (!currentImage || !nextImage) continue;
-
-          scrollTimeline.to(
-            currentImage,
-            {
-              scale: 0.7,
-              rotation: 5,
-              duration: 1,
-              ease: "none",
-            },
-            position,
-          );
-
-          scrollTimeline.to(
-            nextImage,
-            {
-              y: "0%",
-              duration: 1,
-              ease: "none",
-            },
-            position,
-          );
-        }
+        scrollTimeline.to(
+          nextImage,
+          {
+            y: "0%",
+            duration: 1,
+            ease: "none",
+          },
+          position,
+        );
       }
 
       const resizeObserver = new ResizeObserver(() => {
