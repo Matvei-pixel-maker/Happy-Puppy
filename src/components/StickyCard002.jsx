@@ -1,9 +1,7 @@
-"use client";
-
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 // Minimal cn utility (classnames merger) — no external dependency
 function cn(...classes) {
@@ -13,6 +11,14 @@ function cn(...classes) {
 const CardData = ({ cards, className, containerClassName, imageClassName }) => {
   const container = useRef(null);
   const imageRefs = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   useGSAP(
     () => {
@@ -22,9 +28,6 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
       const totalCards = imageElements.length;
 
       if (!imageElements[0]) return;
-
-      // На мобильных отключаем pin и scrub — картинки идут простой стопкой
-      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
       gsap.set(imageElements[0], { y: "0%", scale: 1, rotation: 0, autoAlpha: 1 });
 
@@ -92,13 +95,13 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
 
   return (
     <div
-      className={cn("sticky-cards relative h-screen w-full", className)}
+      className={cn(isMobile ? "relative w-full" : "sticky-cards relative h-screen w-full", className)}
       ref={container}
     >
-      <div className="relative flex h-full w-full items-center justify-center overflow-hidden p-3 lg:p-8">
+      <div className={cn(isMobile ? "relative w-full py-8" : "relative flex h-full w-full items-center justify-center overflow-hidden p-3 lg:p-8")}>
         <div
           className={cn(
-            "relative h-[90%] w-full max-w-sm overflow-hidden rounded-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl",
+            isMobile ? "relative w-full" : "relative h-[90%] w-full max-w-sm overflow-hidden rounded-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl",
             containerClassName,
           )}
         >
@@ -108,7 +111,9 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
               src={card.image}
               alt={card.alt || ""}
               className={cn(
-                "rounded-4xl absolute h-full w-full object-cover",
+                isMobile
+                  ? "rounded-4xl w-full h-auto block mb-6 object-cover"
+                  : "rounded-4xl absolute h-full w-full object-cover",
                 imageClassName,
               )}
               ref={(el) => {
