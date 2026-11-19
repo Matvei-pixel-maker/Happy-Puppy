@@ -1,0 +1,9 @@
+﻿commit 17dd4a4adb94a4f10a30b81e33f299334720cf58
+Author: Matvei-pixel-maker <zorik2003cs@mail.ru>
+Date:   Wed Nov 18 22:41:09 2026 +0300
+
+    Исправлены различные ошибки на телефоне
+
+ build_mobile_final.txt           | 22 +++++++++++
+ src/components/StickyCard002.jsx | 79 ++++++++++++++++++++--------------------
+ 2 files changed, 62 insertions(+), 39 deletions(-)

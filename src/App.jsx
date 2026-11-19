@@ -321,8 +321,8 @@ function App() {
           )}
         </section>
 
-        <p className="mx-auto max-w-6xl px-6 text-center text-sm text-[#4a3b32]/60 mb-20">
-          Актуальную стоимость и наличие, пожалуйста, уточняйте при заказе.
+        <p className="mx-auto max-w-6xl px-6 text-center text-sm text-[#4a3b32]/60 mt-3 mb-20">
+          {t.menu.notePrice}
         </p>
 
         <section id="about" className="relative z-20 mt-24 scroll-mt-28">

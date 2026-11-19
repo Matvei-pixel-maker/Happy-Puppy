@@ -56,6 +56,7 @@ export const translations = {
       addToOrderLabel: 'Добавить в заказ',
       showMore: 'Показать ещё',
       showLess: 'Свернуть',
+      notePrice: 'Актуальную стоимость и наличие, пожалуйста, уточняйте при заказе.',
     },
     about: {
       eyebrow: 'О нас',
@@ -123,6 +124,7 @@ export const translations = {
       addToOrderLabel: 'Add to order',
       showMore: 'Show more',
       showLess: 'Collapse',
+      notePrice: 'Please check current price and availability when ordering.',
     },
     about: {
       eyebrow: 'About us',
@@ -189,6 +191,7 @@ export const translations = {
       addToOrderLabel: '加入订单',
       showMore: '显示更多',
       showLess: '收起',
+      notePrice: '请下单时确认实际价格与库存。',
     },
     about: {
       eyebrow: '关于我们',

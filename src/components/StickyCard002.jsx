@@ -22,9 +22,6 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
 
   useGSAP(
     () => {
-      // На мобильных вообще не инициализируем ScrollTrigger/GSAP для галереи
-      if (isMobile) return;
-
       gsap.registerPlugin(ScrollTrigger);
 
       const imageElements = imageRefs.current;
@@ -97,17 +94,22 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
   return (
     <div
       className={cn(
-        isMobile
-          ? "relative w-full min-h-[calc(100vh-80px)]"
-          : "sticky-cards relative h-screen w-full",
+        isMobile ? "relative h-screen w-full" : "sticky-cards relative h-screen w-full",
         className
       )}
       ref={container}
     >
-      <div className={cn(isMobile ? "relative w-full py-8" : "relative flex h-full w-full items-center justify-center overflow-hidden p-3 lg:p-8")}>
+      <div
+        className={cn(
+          "relative flex h-full w-full items-center justify-center overflow-hidden p-4",
+          className,
+        )}
+      >
         <div
           className={cn(
-            isMobile ? "relative w-full" : "relative h-[90%] w-full max-w-sm overflow-hidden rounded-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl",
+            isMobile
+              ? "relative h-[85vh] w-full max-w-xs overflow-hidden rounded-lg"
+              : "relative h-[90%] w-full max-w-sm overflow-hidden rounded-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl",
             containerClassName,
           )}
         >
@@ -117,9 +119,7 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
               src={card.image}
               alt={card.alt || ""}
               className={cn(
-                isMobile
-                  ? "rounded-4xl w-full h-auto block mb-6 object-cover"
-                  : "rounded-4xl absolute h-full w-full object-cover",
+                "rounded-4xl absolute h-full w-full object-cover",
                 imageClassName,
               )}
               ref={(el) => {

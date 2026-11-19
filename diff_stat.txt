@@ -1,0 +1,7 @@
+﻿ src/components/CanvasErrorBoundary.jsx | 28 ++++++++++++
+ src/components/CupFallback.jsx         | 78 +++++++++++++++++++++++++++++++++
+ src/components/ExplodedScene.jsx       | 44 ++++++++++++++-----
+ src/components/Scene.jsx               | 80 ++++++++++++++++++++++------------
+ src/lib/webgl.js                       | 22 ++++++++++
+ src/main.jsx                           |  2 +-
+ 6 files changed, 214 insertions(+), 40 deletions(-)
