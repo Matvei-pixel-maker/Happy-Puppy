@@ -168,7 +168,7 @@ function App() {
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="relative z-0 -mx-6 w-[calc(100%+3rem)] min-h-[500px] md:mx-0 md:w-full md:min-h-auto"
+            className="relative z-0 mx-0 w-full min-h-[500px] md:-mx-6 md:w-[calc(100%+3rem)] md:min-h-auto"
           >
             {/* 2D-декор: фрукты, ягоды и листики вокруг стакана */}
             <Decor />

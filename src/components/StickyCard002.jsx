@@ -101,14 +101,16 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
     >
       <div
         className={cn(
-          "relative flex h-full w-full items-center justify-center overflow-hidden p-4",
+          isMobile
+            ? "relative flex h-full w-full items-center justify-center overflow-hidden"
+            : "relative flex h-full w-full items-center justify-center overflow-hidden p-4",
           className,
         )}
       >
         <div
           className={cn(
             isMobile
-              ? "relative h-[85vh] w-full max-w-xs overflow-hidden rounded-lg"
+              ? "relative h-screen w-full overflow-hidden"
               : "relative h-[90%] w-full max-w-sm overflow-hidden rounded-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl",
             containerClassName,
           )}
@@ -119,7 +121,9 @@ const CardData = ({ cards, className, containerClassName, imageClassName }) => {
               src={card.image}
               alt={card.alt || ""}
               className={cn(
-                "rounded-4xl absolute h-full w-full object-cover",
+                isMobile
+                  ? "absolute h-full w-full object-cover"
+                  : "rounded-4xl absolute h-full w-full object-cover",
                 imageClassName,
               )}
               ref={(el) => {
