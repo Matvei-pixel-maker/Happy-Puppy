@@ -6,7 +6,8 @@ import { useEffect, useRef } from 'react'
  * - requestAnimationFrame, отмена при размонтировании.
  * - pointer-events-none — не перекрывает текст и 3D-стакан.
  * - Движение мыши только при активном курсоре; на тачах пузырьки просто всплывают.
- * - Позиционирование абсолютное внутри Hero-секции.
+ * - Ограниченный DPR для мобилок (max 1.5x), иначе канва рендерится в 3x.
+ * - Мутация существующего объекта мыши вместо создания нового каждый кадр.
  */
 
 const COLORS = ['#c68b59', '#a05a2c', '#8d5524', '#ff758f', '#ffd166', '#bfeadf']
@@ -19,7 +20,6 @@ function BubbleBackground() {
   const mouseRef = useRef({ x: 0, y: 0, active: false })
 
   useEffect(() => {
-    // На десктопе больше пузырей для насыщенного фона, на мобилке немного, чтобы не лагало
     const isMobile = window.innerWidth < 768
     const BUBBLE_COUNT = isMobile ? 12 : 55
 
@@ -29,26 +29,32 @@ function BubbleBackground() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    // Ограничиваем DPR на мобилках, иначе канва рендерится в 3x и больше
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2)
+
     const resize = () => {
       const rect = container.getBoundingClientRect()
-      const dpr = window.devicePixelRatio || 1
       canvas.width = Math.ceil(rect.width * dpr)
       canvas.height = Math.ceil(rect.height * dpr)
       canvas.style.width = rect.width + 'px'
       canvas.style.height = rect.height + 'px'
-      ctx.scale(dpr, dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       sizeRef.current = { w: Math.floor(rect.width), h: Math.floor(rect.height) }
     }
-    window.addEventListener('resize', resize)
+    window.addEventListener('resize', resize, { passive: true })
     resize()
 
+    // Мутируем существующий объект вместо создания нового каждый кадр (меньше GC)
     const mousemove = (e) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY, active: true }
+      const m = mouseRef.current
+      m.x = e.clientX
+      m.y = e.clientY
+      m.active = true
     }
     const mouseleave = () => {
-      mouseRef.current = { ...mouseRef.current, active: false }
+      mouseRef.current.active = false
     }
-    window.addEventListener('mousemove', mousemove)
+    window.addEventListener('mousemove', mousemove, { passive: true })
     window.addEventListener('mouseleave', mouseleave)
 
     const bubbles = Array.from({ length: BUBBLE_COUNT }, () => ({

@@ -35,8 +35,18 @@ function App() {
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 768)
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
+    let ticking = false
+    const throttled = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          onResize()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+    window.addEventListener('resize', throttled, { passive: true })
+    return () => window.removeEventListener('resize', throttled)
   }, [])
 
   // При первой загрузке сайта скроллим к самому верху — первому блоку с фотографиями (cafe9.jpg).
